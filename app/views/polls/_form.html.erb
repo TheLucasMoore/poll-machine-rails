@@ -2,9 +2,5 @@
   <%= f.label :title %>
   <%= f.text_field :title %><br />
 
-  <%= f.fields_for :questions do |question| %>
-    <%= question.label :content %>
-    <%= question.text_field :content %>
-  <% end %>
   <%= f.submit %>
 <% end %>

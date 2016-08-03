@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   def index
-    @polls = Poll.all
+    @polls = Poll.where(user_id: current_user.id)
   end
 
   def show
@@ -13,16 +14,17 @@ class PollsController < ApplicationController
 
   def create
     @poll = Poll.new(poll_params)
+    @poll.user = current_user
     if @poll.save
       redirect_to poll_path(@poll)
     else
-      render new
+      render :new
     end
   end
 
   private
 
   def poll_params
-    require(:poll).permit(:title, :user_id, question_attributes: [:content])
+    params.require(:poll).permit(:title)
   end
 end
