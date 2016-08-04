@@ -1,5 +1,7 @@
 <%= form_for @poll do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %><br />
+  <%= f.label "Poll Expiration" %>
+  <%= f.datetime_field(:end_time) %>
   <%= f.submit %>
 <% end %>

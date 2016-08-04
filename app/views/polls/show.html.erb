@@ -2,7 +2,7 @@
 <p>Share this poll: <%= render_shareable :buttons=> ['twitter'] %></p>
 
 <% if @poll.user.id = @user.id %>
-  <p><%= link_to "Edit Poll Title", edit_poll_path(@poll) %></p>
+  <p><%= link_to "Edit Poll", edit_poll_path(@poll) %></p>
   <p><%= link_to "Add Questions", new_poll_question_path(@poll) %></p>
 <% else %>
   <p></p>

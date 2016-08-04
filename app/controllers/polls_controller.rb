@@ -5,8 +5,12 @@ class PollsController < ApplicationController
   end
 
   def show
-    @user = current_or_guest_user
     @poll = Poll.find(params[:id])
+    @user = current_or_guest_user
+    if @poll.end_time < Date.today
+      redirect_to poll_charts_path(@poll)
+      flash[:alert] = "This poll has closed. Check out the results!"
+    end
   end
 
   def chart
@@ -41,6 +45,6 @@ class PollsController < ApplicationController
   private
 
   def poll_params
-    params.require(:poll).permit(:title)
+    params.require(:poll).permit(:title, :end_time)
   end
 end
