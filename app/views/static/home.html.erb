@@ -7,5 +7,6 @@
       </p>
     <%= button_to "Sign Up", new_user_registration_path, :method => :get, :class => "btn btn-primary btn-large" %><br><br>
     <%= button_to "Sign In", new_user_session_path, :method => :get, :class => "btn btn-primary btn-large" %><br><br>
+    <%= button_to "Sign In With Twitter", user_twitter_omniauth_authorize_path, :class => "btn btn-primary btn-large" %><br><br>
     </div>
 </div>

@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'figaro'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
