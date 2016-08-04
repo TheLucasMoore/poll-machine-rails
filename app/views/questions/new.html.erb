@@ -1,3 +1,9 @@
+<ul>
+<% @poll.questions.each do |question| %>
+  <li><%= question.content %></li>
+<% end %>
+</ul>
+
 <form id="q_form" action="/polls/<%= @poll.id %>/questions" method="POST">
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
   <input type="text" name="question" placeholder="New Question" /><br>

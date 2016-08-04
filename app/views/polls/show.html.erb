@@ -7,7 +7,45 @@
 <% end %>
 <ul>
 <% @poll.questions.each do |question| %>
-  <li><%= question.content %></li>
+  <li><h2><%= question.content %></h2>
+  <form id="votes" method="POST" action="/votes">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input type="hidden" name="question" value="<%= question.id %>">
+  <button type="submit" class="button" id="submit">Vote</vote>
+  </form>
+  </li>
 <% end %>
 </ul>
-<br><br>
+
+<% content_for :votes do %>
+<script>
+
+$(function() {
+  init()
+});
+
+function init() {
+  $('#submit').on('click', function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/votes',
+      method: 'POST',
+      dataType: JSON,
+      data: $("#votes").serialize(),
+      success: function(response) {
+        // do something
+        alert("You Voted!");
+        $('.button').hide();
+      },
+      error: function(xhr, resp, text) {
+        console.log(xhr, resp, text);
+        alert("That Didn't Count. You can't vote twice!");
+        $('.button').hide();
+      }
+    });
+  })
+}
+
+
+</script>
+<% end %>
