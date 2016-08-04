@@ -1,18 +1,21 @@
 <h1><%= @poll.title %></h1>
-<% if @poll.user.id == @user.id %>
-<p><%= link_to "Edit Poll Title", edit_poll_path(@poll) %></p>
-<p><%= link_to "Add Questions", new_poll_question_path(@poll) %></p>
+<p>Share this poll: <%= render_shareable :buttons=> ['twitter'] %></p>
+
+<% if @poll.user.id = @user.id %>
+  <p><%= link_to "Edit Poll Title", edit_poll_path(@poll) %></p>
+  <p><%= link_to "Add Questions", new_poll_question_path(@poll) %></p>
 <% else %>
-<p> </p>
+  <p></p>
 <% end %>
+
 <ul>
 <% @poll.questions.each do |question| %>
   <li><h2><%= question.content %></h2>
-  <form id="votes" method="POST" action="/votes">
-  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-  <input type="hidden" name="question" value="<%= question.id %>">
-  <button type="submit" class="button" id="submit">Vote</vote>
-  </form>
+    <form id="votes" method="POST" action="/votes">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="hidden" name="question" value="<%= question.id %>">
+      <button type="submit" class="button" id="submit">Vote</vote>
+    </form>
   </li>
 <% end %>
 </ul>
@@ -27,7 +30,6 @@ $(function() {
 function init() {
   $('.button').on('click', function(event) {
     event.preventDefault();
-    alert("click");
     $.ajax({
       url: '/votes',
       method: 'POST',
@@ -38,8 +40,7 @@ function init() {
         $('.button').hide();
       },
       error: function(xhr, resp, text) {
-        console.log(xhr, resp, text);
-        alert("That Didn't Count. You can't vote twice!");
+        alert("You already voted!")
         $('.button').hide();
       }
     });
