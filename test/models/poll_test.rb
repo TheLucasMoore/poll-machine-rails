@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class PollTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  it "should require a poll title" do
+    poll = Poll.create(:title => "")
+    poll.valid?
+    poll.errors.should have_key(:title)
+  end
+  
 end
