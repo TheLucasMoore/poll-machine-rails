@@ -19,6 +19,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'figaro'
+gem 'chart-js-rails'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 

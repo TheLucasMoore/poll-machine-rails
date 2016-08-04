@@ -1,11 +1,17 @@
 class PollsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   def index
     @polls = Poll.where(user_id: current_user.id)
   end
 
   def show
+    @user = current_or_guest_user
     @poll = Poll.find(params[:id])
+  end
+
+  def chart
+    @poll = Poll.find(params[:id])
+    @questions = @poll.questions
   end
 
   def new
