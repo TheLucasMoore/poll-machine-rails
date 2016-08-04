@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :polls do
     resources :questions
+    resources :charts, only: [:index]
   end
   resources :votes, only: [:create]
 end
