@@ -1,17 +1,17 @@
+<h1><%= @poll.title %></h1>
 <canvas id="myChart" width="400" height="400"></canvas>
-
 <% content_for :charts do %>
 <script>
 
 $(function() {
-var ctx = $("#myChart");
-var myChart = new Chart(ctx, {
+  var ctx = $("#myChart");
+  var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: <%= raw @questions.map {|q| q.content} %>,
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: <%= raw @questions.map {|q| q.votes.count} %>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -30,15 +30,6 @@ var myChart = new Chart(ctx, {
             ],
             borderWidth: 1
         }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
     }
   });
 });
