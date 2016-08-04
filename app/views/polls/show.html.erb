@@ -1,5 +1,9 @@
 <h1><%= @poll.title %></h1>
-<p><%= link_to "Edit this poll", edit_poll_path(@poll) %></p>
+<p><%= link_to "Edit Poll Title", edit_poll_path(@poll) %></p>
+<ul>
 <% @poll.questions.each do |question| %>
-  <%= question.content %>
+  <li><%= question.content %></li>
 <% end %>
+</ul>
+<br><br>
+<%= link_to "Add Questions", new_poll_question_path(@poll) %>

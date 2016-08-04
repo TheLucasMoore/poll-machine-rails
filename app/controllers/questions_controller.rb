@@ -36,10 +36,14 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     @question.update(question_params)
-    redirect_to question_path(@question)
+    redirect_to poll_path(@poll)
   end
 
   private
+
+  def question_params
+    params.require(:question).permit(:content, :poll_id)
+  end
 
   def find_poll
     @poll = Poll.find(params[:poll_id])
