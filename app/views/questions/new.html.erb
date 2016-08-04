@@ -1,1 +1,34 @@
-<%= render 'form' %>
+<form id="q_form" action="/polls/6/questions" method="POST">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input type="text" name="question" placeholder="New Question" /><br>
+  <div id="questions"></div>
+  <a id="more" href="#">Add Question</a>
+  <input id="q_submit" type="submit" name="submit" value="Create">
+</form>
+
+<% content_for :questions do %>
+<script>
+
+$(function() {
+  init()
+  formHandler()
+})
+
+function init() {
+  var counter = 0;
+  $('#more').click(function() {
+    counter ++;
+    var html = '<input type="text" placeholder="New Question" name="question_' + counter + '"/><br>'
+    $('#questions').append(html)
+  })
+}
+
+function formHandler() {
+  $('#q_submit').on('click', function(e) {
+    e.preventDefault;
+    alert("yerp");
+  })
+}
+
+</script>
+<% end %>

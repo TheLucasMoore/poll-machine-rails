@@ -3,6 +3,10 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = @poll.questions
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @questions}
+    end
   end
 
   def show
@@ -14,13 +18,15 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.poll = @poll
-    if @question.save
-      redirect_to poll_question_path(@poll, @question)
-    else
-      render :new
+    params.each do |param, value|
+      if param.include?("question")
+        q = Question.create(content: value)
+        q.poll = @poll
+        q.save
+        #raise q.inspect
+      end
     end
+    redirect_to poll_path(@poll)
   end
 
   def edit
@@ -34,10 +40,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  def question_params
-    params.require(:question).permit(:content, :poll_id)
-  end
 
   def find_poll
     @poll = Poll.find(params[:poll_id])

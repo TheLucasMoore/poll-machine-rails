@@ -16,7 +16,7 @@ class PollsController < ApplicationController
     @poll = Poll.new(poll_params)
     @poll.user = current_user
     if @poll.save
-      redirect_to poll_path(@poll)
+      redirect_to new_poll_question_path(@poll)
     else
       render :new
     end

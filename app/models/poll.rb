@@ -3,5 +3,6 @@ class Poll < ApplicationRecord
   has_many :questions
 
   accepts_nested_attributes_for :questions
-  validates_presence_of :title, :user_id, presence: true
+  validates :user_id, presence: true
+  validates :title, uniqueness: true, presence: true
 end

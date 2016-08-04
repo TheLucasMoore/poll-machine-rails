@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= yield :questions %>
   </head>
 
   <body>
@@ -41,27 +42,7 @@
               </ul>
           </div>
         </div>
-
-
-
-
-
-
-            <!-- div class="collapse navbar-collapse"
-            <ul class="nav nav-bar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-              </li>
-              <% if current_user %>
-              <li class="nav-item">
-                <a class="nav-link" href="/polls">Polls</a>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Log Out", destroy_user_session_path, method: :delete, :class => "nav-link" %>
-              </li>
-              <% end %>
-            </ul>
-          </nav> -->
+      </nav>
           <div class="jumbotron">
             <h1>Poll Machine</h1>
           </div>
