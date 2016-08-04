@@ -1,9 +1,13 @@
 <h1><%= @poll.title %></h1>
+<% if @poll.user.id == current_user.id %>
 <p><%= link_to "Edit Poll Title", edit_poll_path(@poll) %></p>
+<p><%= link_to "Add Questions", new_poll_question_path(@poll) %></p>
+<% else %>
+<p> </p>
+<% end %>
 <ul>
 <% @poll.questions.each do |question| %>
   <li><%= question.content %></li>
 <% end %>
 </ul>
 <br><br>
-<%= link_to "Add Questions", new_poll_question_path(@poll) %>
