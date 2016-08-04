@@ -1,0 +1,5 @@
+<%= form_for ([@poll, @question]) do |f| %>
+  <%= f.label "Question Content" %>
+  <%= f.text_field :content %>
+  <%= f.submit %>
+<% end %>

@@ -1,4 +1,9 @@
-<h1>Polls#index</h1>
-<% @polls.each do |poll| %>
-  <%= poll.title %>
-<% end %>
+<h1>Your Polls</h1>
+
+<ul>
+  <% @polls.each do |poll| %>
+    <li>
+      <%= link_to poll.title, poll_path(poll) %>
+    </li>
+  <% end %>
+</ul>

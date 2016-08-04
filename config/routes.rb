@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'static#home'
 
   resources :polls do
-    resources :quesitons
+    resources :questions
   end
   resources :votes, only: [:create]
 end

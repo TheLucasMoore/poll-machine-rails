@@ -1,2 +1,5 @@
-<h1>Polls#show</h1>
-<p><%= @poll.title %></p>
+<h1><%= @poll.title %></h1>
+<p><%= link_to "Edit this poll", edit_poll_path(@poll) %></p>
+<% @poll.questions.each do |question| %>
+  <%= question.content %>
+<% end %>
