@@ -1,13 +1,46 @@
   <div class="row">
-    <div class="col-xs-9">
+    <div class="col-xs-9 col-lg-offset-1">
       <p>Poll Machine is a simple way to create polls and get
         feedback from your friends! First, sign up for an account.
         Then you can create polls to send out for feedback. Users can only vote once,
-        so you know the results are honest.
+        so you know the results are honest. You'll get a snazzy chart like this to share
+        across the web as well.
       </p>
-    <h4>New here?</h4><%= button_to "Sign Up", new_user_registration_path, :method => :get, :class => "btn btn-primary btn-large" %><br>
-    <h4>Feeling Lazy?</h4><%= button_to "Sign In With Twitter", user_twitter_omniauth_authorize_path, :class => "btn btn-primary btn-large" %><br>
-    <h4>Already Registered?</h4><%= button_to "Sign In", new_user_session_path, :method => :get, :class => "btn btn-primary btn-large" %><br>
-
+    <div class="row">
+      <div class="col-md-5">
+      <canvas id="myChart" width="100" height="100"></canvas>
+      </div>
+      <div class="col-md-6 col-md-offset-1">
+        <h4>New here?</h4><%= button_to "Sign Up", new_user_registration_path, :method => :get, :class => "btn btn-primary btn-large" %><br>
+        <h4>Feeling Lazy?</h4><%= button_to "Sign In With Twitter", user_twitter_omniauth_authorize_path, :class => "btn btn-primary btn-large" %><br>
+        <h4>Already Registered?</h4><%= button_to "Sign In", new_user_session_path, :method => :get, :class => "btn btn-primary btn-large" %><br>
+      </div>
     </div>
 </div>
+
+<% content_for :home do %>
+<script>
+
+$(function() {
+  var ctx = $("#myChart");
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    scaleStartValue: 0,
+    data: {
+        labels: ["Very Good", "Very Bad", "Very Very"],
+        datasets: [{
+            label: 'Number of Votes',
+            data: [10, 1, 22],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    }
+  });
+});
+</script>
+<% end %>

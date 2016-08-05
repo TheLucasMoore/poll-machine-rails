@@ -1,4 +1,5 @@
 <h1>Notifications</h1>
+<p>You'll see a timestamped notification here from each time someone votes on one of your polls!</p>
 <ul class="list-group">
 <% @notifications.each do |note| %>
   <li class="list-item"><%= note.message %> (<%= note.created_at %>)</li>

@@ -9,6 +9,7 @@
     <%= yield :questions %>
     <%= yield :votes %>
     <%= yield :charts %>
+    <%= yield :home %>
   </head>
 
   <body>
@@ -48,13 +49,15 @@
           </div>
         </div>
       </nav>
+        <div class="row">
           <div class="jumbotron">
-            <h1>
+            <h1 id="static">
               <span class="glyphicon glyphicon-thumbs-up fa-lg">
               Poll Machine 3000
               <span class="glyphicon glyphicon-signal fa-lg">
             </h1>
           </div>
+        </div>
           <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "alert alert-danger") if flash[:error] %>
           <%= content_tag(:div, flash[:notice], :id => "flash_notice", :class => "alert alert-success") if flash[:notice] %>
           <%= content_tag(:div, flash[:alert], :id => "flash_alert", :class => "alert alert-info") if flash[:alert] %>
