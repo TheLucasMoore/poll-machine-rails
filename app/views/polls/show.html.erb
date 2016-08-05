@@ -6,9 +6,9 @@
 <ul class="list-group">
 <% @poll.questions.each do |question| %>
   <li class="list-group-item"><h2><%= question.content %></h2>
-    <form id="votes" method="POST" action="/votes">
+    <form class="votes" method="POST" action="/votes">
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-      <input type="hidden" name="question" value="<%= question.id %>">
+      <input type="hidden" name="question" id="question" value="<%= question.id %>">
       <button type="submit" class="btn" id="submit">Vote</vote>
     </form>
   </li>
@@ -28,7 +28,7 @@ function init() {
     $.ajax({
       url: '/votes',
       method: 'POST',
-      data: $("#votes").serialize(),
+      data: $(".votes").serialize(),
       success: function(response) {
         console.log(response);
         alert("Your Vote was Counted!");
