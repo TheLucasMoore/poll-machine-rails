@@ -1,7 +1,7 @@
 <h1>Poll: <%= @poll.title %></h1>
 <p>This poll is open until <%= @poll.end_time.strftime("%A, %B %d")  %>. Everyone may only vote once.</p>
 <p>Share this poll: <%= render_shareable :buttons=> ['twitter'] %></p>
-<div id="results"></div>
+<p><%= link_to "See Current Results", poll_charts_path(@poll) %>
 
 <ul class="list-group">
 <% @poll.questions.each do |question| %>
@@ -9,13 +9,14 @@
     <form class="votes" method="POST" action="/votes">
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       <input type="hidden" name="question" id="question" value="<%= question.id %>">
+      <input type="hidden" name="poll" id="question" value="<%= @poll.id %>">
       <button type="submit" class="btn" id="submit">Vote</vote>
     </form>
   </li>
 <% end %>
 </ul>
 
-<% content_for :votes do %>
+<!-- <% content_for :votes do %>
 <script>
 
 $(function() {
@@ -24,7 +25,7 @@ $(function() {
 
 function init() {
   $('.btn').on('click', function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     $.ajax({
       url: '/votes',
       method: 'POST',
@@ -37,7 +38,7 @@ function init() {
       }
     });
   })
-}
+} -->
 
 
 </script>
