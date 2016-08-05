@@ -1,20 +1,15 @@
-<h1><%= @poll.title %></h1>
+<h1>Poll: <%= @poll.title %></h1>
+<p>This poll is open until <%= @poll.end_time.strftime("%A, %B %d")  %>. Everyone may only vote once.</p>
 <p>Share this poll: <%= render_shareable :buttons=> ['twitter'] %></p>
+<div id="results"></div>
 
-<% if @poll.user.id = @user.id %>
-  <p><%= link_to "Edit Poll", edit_poll_path(@poll) %></p>
-  <p><%= link_to "Add Questions", new_poll_question_path(@poll) %></p>
-<% else %>
-  <p></p>
-<% end %>
-
-<ul>
+<ul class="list-group">
 <% @poll.questions.each do |question| %>
-  <li><h2><%= question.content %></h2>
+  <li class="list-group-item"><h2><%= question.content %></h2>
     <form id="votes" method="POST" action="/votes">
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       <input type="hidden" name="question" value="<%= question.id %>">
-      <button type="submit" class="button" id="submit">Vote</vote>
+      <button type="submit" class="btn" id="submit">Vote</vote>
     </form>
   </li>
 <% end %>
@@ -28,20 +23,17 @@ $(function() {
 });
 
 function init() {
-  $('.button').on('click', function(event) {
+  $('.btn').on('click', function(event) {
     event.preventDefault();
     $.ajax({
       url: '/votes',
       method: 'POST',
-      dataType: JSON,
       data: $("#votes").serialize(),
       success: function(response) {
-        alert("You Voted!");
-        $('.button').hide();
-      },
-      error: function(xhr, resp, text) {
-        alert("You already voted!")
-        $('.button').hide();
+        console.log(response);
+        alert("Your Vote was Counted!");
+        $('.btn').hide();
+        $('#results').append('<h1><%= link_to "See Results so Far", poll_charts_path(@poll) %></h1>')
       }
     });
   })

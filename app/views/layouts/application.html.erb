@@ -46,7 +46,11 @@
         </div>
       </nav>
           <div class="jumbotron">
-            <h1>Poll Machine</h1>
+            <h1>
+              <span class="glyphicon glyphicon-thumbs-up" style="font-size: 1em">
+              Poll Machine
+              <span class="glyphicon glyphicon-signal" style="font-size: 1em">
+            </h1>
           </div>
           <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "alert alert-danger") if flash[:error] %>
           <%= content_tag(:div, flash[:notice], :id => "flash_notice", :class => "alert alert-success") if flash[:notice] %>

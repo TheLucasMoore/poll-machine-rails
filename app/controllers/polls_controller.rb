@@ -1,13 +1,14 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   def index
+    @user = current_or_guest_user
     @polls = Poll.where(user_id: current_user.id)
   end
 
   def show
     @poll = Poll.find(params[:id])
     @user = current_or_guest_user
-    if @poll.end_time < Date.today
+    if @poll.end_time > Date.today
       redirect_to poll_charts_path(@poll)
       flash[:alert] = "This poll has closed. Check out the results!"
     end

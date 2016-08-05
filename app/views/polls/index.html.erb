@@ -1,9 +1,15 @@
 <h1>Your Polls</h1>
-
-<ul>
+<p><%= link_to "Create a Poll", new_poll_path %>
+<ul class="list-group">
   <% @polls.each do |poll| %>
-    <li>
-      <%= link_to poll.title, poll_path(poll) %>
+    <li class="list-group-item">
+      <h2><%= link_to poll.title, poll_path(poll) %></h2>
+      <% if poll.user.id = @user.id %>
+        <p>
+        <%= link_to "Edit Poll | ", edit_poll_path(poll) %>
+        <%= link_to "Add Questions | ", new_poll_question_path(poll) %>
+        <%= link_to "See Results so Far", poll_charts_path(poll) %>
+      <% end %>
     </li>
   <% end %>
 </ul>
