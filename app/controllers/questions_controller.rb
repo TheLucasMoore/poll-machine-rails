@@ -39,6 +39,13 @@ class QuestionsController < ApplicationController
     redirect_to poll_path(@poll)
   end
 
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    flash[:alert] = "Deleted Question"
+    redirect_to polls_path
+  end
+
   private
 
   def question_params

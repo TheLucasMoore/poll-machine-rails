@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
+
   devise_for :users, controllers: {:omniauth_callbacks => 'users/omniauth_callbacks' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static#home'
@@ -8,4 +10,5 @@ Rails.application.routes.draw do
     resources :charts, only: [:index]
   end
   resources :votes, only: [:create]
+  resources :notifications, only: [:create, :index]
 end

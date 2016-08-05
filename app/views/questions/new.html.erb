@@ -1,6 +1,8 @@
 <ul>
 <% @poll.questions.each do |question| %>
-  <li><%= question.content %></li>
+  <li><%= question.content %>
+  <%= link_to "Delete", poll_question_path(@poll, question), :method => "DELETE", data: {confirm: "Are you sure?"} %>
+  </li>
 <% end %>
 </ul>
 

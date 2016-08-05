@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :polls
   has_many :votes
+  has_many :notifications
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -4,6 +4,8 @@ class VotesController < ApplicationController
     @poll = Poll.find(params[:poll])
     @vote = Vote.new(question: @question, poll: @poll, user: current_or_guest_user)
     if @vote.save
+      message = "You have a new vote"
+      notification = Notification.create(user_id: @poll.user.id, message: message)
       flash[:alert] = "Thanks for your vote."
       redirect_to poll_charts_path(@poll)
     else

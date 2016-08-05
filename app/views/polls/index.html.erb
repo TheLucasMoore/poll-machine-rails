@@ -7,7 +7,8 @@
       <% if poll.user.id = @user.id %>
         <p>
         <%= link_to "Edit Poll | ", edit_poll_path(poll) %>
-        <%= link_to "Add Questions | ", new_poll_question_path(poll) %>
+        <%= link_to "Delete Poll | ", poll_path(poll), :method => "DELETE", data: {confirm: "Are you sure?"} %>
+        <%= link_to "Edit Questions | ", new_poll_question_path(poll) %>
         <%= link_to "See Results so Far", poll_charts_path(poll) %>
       <% end %>
     </li>

@@ -1,0 +1,6 @@
+<h1>Notifications</h1>
+<ul class="list-group">
+<% @notifications.each do |note| %>
+  <li class="list-item"><%= note.message %> (<%= note.created_at %>)</li>
+<% end %>
+</ul>
